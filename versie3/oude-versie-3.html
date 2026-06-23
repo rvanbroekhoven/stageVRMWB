@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Operationeel Dagjournaal - VRMWB</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body data-theme="light">
+
+    <div class="bg-layer"></div>
+
+    <header class="topbar">
+        <div class="tb-left">
+            <a href="https://ralphsmits.github.io/vrmwb/" class="tb-btn white">ODj Widget</a>
+            <div class="tb-divider"></div>
+            <div class="loc-wrap" id="loc-wrap">
+                <button class="loc-btn" id="loc-btn">
+                    <svg viewBox="0 0 24 24" class="loc-ico"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                    <span id="loc-label">Selecteer kazerne</span>
+                    <svg viewBox="0 0 24 24" class="loc-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="loc-menu" id="loc-menu">
+                    <button class="loc-item" data-val="Bergen op Zoom">Bergen op Zoom</button>
+                    <button class="loc-item" data-val="Breda">Breda</button>
+                    <button class="loc-item" data-val="Moerdijk-Haven">Moerdijk-Haven</button>
+                    <button class="loc-item" data-val="Roosendaal">Roosendaal</button>
+                    <button class="loc-item" data-val="Tilburg Centrum">Tilburg Centrum</button>
+                    <button class="loc-item" data-val="Tilburg Vossenberg">Tilburg Vossenberg</button>
+                </div>
+            </div>
+        </div>
+        <div class="tb-logos">
+            <img src="logo.png" alt="VRMWB Brandweer" class="tb-logo-img" id="tb-logo">
+        </div>
+        <div class="tb-right">
+            <div class="tb-datetime"><span id="bbdate">—</span>&nbsp;&nbsp;<span id="bbtime"></span></div>
+            <div class="tb-divider"></div>
+            <button id="btn-start-presentation" class="tb-btn gold">START</button>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <section class="column">
+            <header class="col-header consistent-header">
+                <h2>BLOK SELECTIE</h2>
+            </header>
+            <div class="scroll-area grid-blocks" id="blok-selectie">
+                <div class="card theme-card-light drag-item" draggable="true" data-id="ploeg-indeling">Ploeg indeling</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="alarmen">Alarmen vorige dienst</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="voertuigen">Status voertuigen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="topdesk">Topdesk</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="mobiliteit">Mobiliteit</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="afspraken">Ploeg afspraken</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="nieuws">Kazerne Nieuws</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="onderhoud">Gepland onderhoud voertuigen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="algemeen">Alg. Werkzaamheden</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="ademlucht">Ademlucht Werkzaamheden</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="vakbekwaam">Vakbekwaam AG5</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="arbo">Arbo Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="communicatie">Communicatie</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="evenementen">Evenementen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="iboa">IBOA Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="ocb">OCB Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="rbcb">RB/CB Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="straten">Stratenkennis</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="tfl">TFL Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="vkb">VKB Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="waarschuwingen">Waarschuwingen &<br>Operationele Fases</div>
+            </div>
+        </section>
+
+        <section class="column glass-panel">
+            <header class="col-header consistent-header">
+                <h2>DAGJOURNAAL</h2>
+                <button id="btn-magic-wand" class="tb-btn white" style="padding:0 10px;border:none;background:transparent;box-shadow:none;cursor:pointer;" title="Automatisch vullen">
+                    <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--text-main);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;">
+                        <path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="M15 9h.01"/><path d="M17.8 6.2 19 5"/><path d="m3 21 9-9"/><path d="M12.2 6.2 11 5"/>
+                    </svg>
+                </button>
+            </header>
+            <div class="scroll-area sequence-list" id="dagjournaal-lijst">
+                <div id="empty-state" class="empty-state-consistent">Sleep blokken hierheen of gebruik de Magic Wand tool.</div>
+            </div>
+        </section>
+
+        <section class="column solid-panel">
+            <header class="col-header consistent-header">
+                <h2 id="editor-title">GEEN BLOK GESELECTEERD</h2>
+                <button id="btn-open-preview" class="btn-preview">Preview</button>
+            </header>
+            <div class="scroll-area editor-form" id="editor-content">
+                <div class="editor-placeholder-text">Selecteer een blok (links of in het midden) om de instellingen te bekijken.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="btmbar">
+        <div class="bb-left">
+            <div class="bb-logo">
+                <strong>Operationeel Dagjournaal</strong>
+                <span>Beheer</span>
+                <div class="bb-release">production 20260330.4</div>
+            </div>
+        </div>
+        <div class="bb-center">
+            <div class="bb-date-nav">
+                <button class="bb-nav-arrow prev-day">&#8249;</button>
+                <button class="bb-date-trigger">Vandaag</button>
+                <button class="bb-nav-arrow next-day">&#8250;</button>
+            </div>
+        </div>
+        <div class="bb-right">
+            <button class="bb-profile" id="profile-btn">
+                <div class="bb-avatar" id="bb-avatar">?</div>
+                <div class="bb-pinfo">
+                    <div class="bb-pname" id="bb-pname">Naam Achternaam</div>
+                    <div class="bb-prole" id="bb-prole">Rol</div>
+                </div>
+            </button>
+        </div>
+    </footer>
+
+    <div class="profile-panel" id="profile-panel">
+        <div class="pp-avatar" id="pp-avatar-large">?</div>
+        <div class="pp-head">Profielinstellingen</div>
+        <label class="pp-lbl">Voornaam</label>
+        <input class="pp-inp" id="pp-voornaam" type="text" placeholder="Voornaam">
+        <label class="pp-lbl">Achternaam</label>
+        <input class="pp-inp" id="pp-achternaam" type="text" placeholder="Achternaam">
+        <label class="pp-lbl">Rol</label>
+        <input class="pp-inp" id="pp-rol" type="text" placeholder="bijv. Ploegcommandant">
+        <div class="pp-toggle-row">
+            <span class="pp-toggle-lbl">Dark mode</span>
+            <button class="pp-toggle" id="dark-toggle" role="switch" aria-checked="false">
+                <span class="pp-toggle-thumb"></span>
+            </button>
+        </div>
+        <button class="pp-save" id="btn-save-profile">Opslaan</button>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <div id="preview-modal" class="modal-overlay">
+        <div class="preview-content">
+            <div class="preview-header">
+                <div class="preview-logo">BMWB</div>
+                <button id="close-preview" class="btn-close-preview">&times;</button>
+            </div>
+            <div id="preview-body" class="preview-body"></div>
+        </div>
+    </div>
+
+    <div id="presentation-overlay" class="presentation-overlay">
+        <div id="pres-bg-image" class="pres-bg-image"></div>
+        <div class="pres-bg-color"></div>
+        <button id="close-presentation" class="btn-close-presentation">&times;</button>
+        <div class="pres-content-wrapper" id="pres-content"></div>
+        <div class="pres-controls">
+            <button id="pres-prev" class="pres-nav-btn">&lt;</button>
+            <span id="pres-counter" class="pres-counter">1 / 5</span>
+            <button id="pres-next" class="pres-nav-btn">&gt;</button>
+        </div>
+        <div id="kis-modal" class="kis-modal-wrapper">
+            <div class="kis-modal-content">
+                <button class="kis-modal-close" id="kis-modal-close">&times;</button>
+                <h3 id="kis-modal-title" style="font-weight:700;font-size:24px;margin-bottom:15px;">Titel</h3>
+                <div id="kis-modal-text" style="opacity:0.8;font-size:16px;line-height:1.6;">Content</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/nl.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
