@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operationeel Dagjournaal - VRMWB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+    
+    <div class="bg-layer">
+        <div class="backdrop-img"></div>
+        <div class="gradient-fade"></div>
+    </div>
+
+    <header class="top-header">
+        <div id="location-trigger" class="location-pill">Tilburg Vossenberg</div>
+        <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
+    </header>
+
+    <main class="app-container">
+        
+        <section class="column">
+            <header class="col-header consistent-header">
+                <h2>BLOK SELECTIE</h2>
+            </header>
+            <div class="scroll-area grid-blocks" id="blok-selectie">
+                <div class="card theme-card-light drag-item" draggable="true" data-id="ploeg-indeling">Ploeg indeling</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="alarmen">Alarmen vorige dienst</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="voertuigen">Status voertuigen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="topdesk">Topdesk</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="mobiliteit">Mobiliteit</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="afspraken">Ploeg afspraken</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="nieuws">Kazerne Nieuws</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="onderhoud">Gepland onderhoud voertuigen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="algemeen">Alg. Werkzaamheden</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="ademlucht">Ademlucht Werkzaamheden</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="vakbekwaam">Vakbekwaam AG5</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="arbo">Arbo Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="communicatie">Communicatie</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="evenementen">Evenementen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="iboa">IBOA Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="ocb">OCB Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="rbcb">RB/CB Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="straten">Stratenkennis</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="tfl">TFL Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="vkb">VKB Mededelingen</div>
+                <div class="card theme-card-light drag-item" draggable="true" data-id="waarschuwingen">Waarschuwingen &<br>Operationele Fases</div>
+            </div>
+        </section>
+
+        <section class="column glass-panel">
+            <header class="col-header consistent-header">
+                <h2>DAGJOURNAAL</h2>
+                <button id="btn-start-presentation" class="btn-preview" style="background-color: var(--vrmwb-gold); color: #1E1E1E;">Start</button>
+            </header>
+            <div class="scroll-area sequence-list" id="dagjournaal-lijst">
+                <div id="empty-state" class="empty-state-consistent">Sleep blokken hierheen</div>
+            </div>
+        </section>
+
+        <section class="column solid-panel">
+            <header class="col-header consistent-header">
+                <h2 id="editor-title">GEEN BLOK GESELECTEERD</h2>
+                <button id="btn-open-preview" class="btn-preview">Preview</button>
+            </header>
+            <div class="scroll-area editor-form" id="editor-content">
+                <div class="editor-placeholder-text">Voeg een blok toe aan het dagjournaal en klik erop om de instellingen te bekijken.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bottom-bar">
+        <div class="logo-section"><div class="title-logo"><strong>OPERATIONEEL DAGJOURNAAL</strong>BEHEER</div></div>
+        <div class="date-controls">
+            <button id="btn-prev-day" class="nav-btn">&lt;</button>
+            <button id="btn-today" class="nav-btn-text">Vandaag</button>
+            <button id="btn-next-day" class="nav-btn">&gt;</button>
+        </div>
+        <div class="status-clock" id="datetime-display">Laden...</div>
+    </footer>
+
+    <div id="location-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>SELECTEER KAZERNE</h3>
+            <div class="location-options">
+                <button class="loc-btn">Bergen op Zoom</button><button class="loc-btn">Breda</button><button class="loc-btn active">Tilburg Vossenberg</button>
+            </div>
+            <button id="close-modal" class="btn-cancel">Annuleren</button>
+        </div>
+    </div>
+
+    <div id="preview-modal" class="modal-overlay">
+        <div class="preview-content">
+            <div class="preview-header"><div class="preview-logo">BMWB</div><button id="close-preview" class="btn-close-preview">&times;</button></div>
+            <div id="preview-body" class="preview-body"></div>
+        </div>
+    </div>
+
+    <div id="presentation-overlay" class="presentation-overlay">
+        <div id="pres-bg-image" class="pres-bg-image"></div>
+        <div class="pres-bg-color"></div>
+        <button id="close-presentation" class="btn-close-presentation">&times;</button>
+        <div class="pres-content-wrapper" id="pres-content"></div>
+        <div class="pres-controls">
+            <button id="pres-prev" class="pres-nav-btn">&lt;</button>
+            <span id="pres-counter" class="pres-counter">1 / 5</span>
+            <button id="pres-next" class="pres-nav-btn">&gt;</button>
+        </div>
+        <div id="kis-modal" class="kis-modal-wrapper">
+            <div class="kis-modal-content">
+                <button class="kis-modal-close" id="kis-modal-close">&times;</button>
+                <h3 id="kis-modal-title" style="font-weight: 700;">Titel</h3>
+                <div id="kis-modal-text" style="opacity: 0.8;">Content</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
